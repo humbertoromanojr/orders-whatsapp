@@ -1,11 +1,12 @@
 import { useRef, useState } from "react"
 import { Text, View, FlatList, SectionList } from "react-native"
+import { Link } from "expo-router"
 
 import { Header } from "@/components/header"
 import { CategoryButton } from "@/components/category-button"
+import { Product } from "@/components/product"
 
 import { CATEGORIES, MENU } from "@/utils/data/products"
-import { Product } from "@/components/product"
 
 export default function Home() {
   const [category, setCategory] = useState(CATEGORIES[0])
@@ -53,7 +54,11 @@ export default function Home() {
         ref={sectionListRef}
         keyExtractor={(item) => item.id}
         stickySectionHeadersEnabled={false}
-        renderItem={({ item }) => <Product data={item} />}
+        renderItem={({ item }) => (
+          <Link href={`/product/${item.id}`} asChild>
+            <Product data={item} />
+          </Link>
+        )}
         renderSectionHeader={({ section: { title } }) => (
           <Text
             style={{
