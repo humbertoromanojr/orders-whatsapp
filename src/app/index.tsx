@@ -5,6 +5,7 @@ import { Header } from "@/components/header"
 import { CategoryButton } from "@/components/category-button"
 
 import { CATEGORIES, MENU } from "@/utils/data/products"
+import { Product } from "@/components/product"
 
 export default function Home() {
   const [category, setCategory] = useState(CATEGORIES[0])
@@ -37,30 +38,25 @@ export default function Home() {
         sections={MENU}
         keyExtractor={(item) => item.id}
         stickySectionHeadersEnabled={false}
-        renderItem={({ item }) => (
-          <Text
-            style={{
-              color: "#fff",
-              paddingBottom: 5,
-              fontSize: 12,
-              paddingLeft: 5,
-            }}
-          >
-            {item.title}
-          </Text>
-        )}
+        renderItem={({ item }) => <Product data={item} />}
         renderSectionHeader={({ section: { title } }) => (
           <Text
             style={{
-              color: "#0f0",
+              backgroundColor: "#17233d",
+              color: "#fff",
               fontSize: 14,
               fontWeight: "bold",
-              paddingTop: 10,
+              padding: 5,
+              marginVertical: 10,
+              textAlign: "center",
             }}
           >
             {title}
           </Text>
         )}
+        style={{ padding: 5 }}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 150 }}
       />
     </View>
   )
