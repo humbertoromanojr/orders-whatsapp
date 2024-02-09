@@ -1,10 +1,10 @@
 import { useState } from "react"
-import { View, FlatList } from "react-native"
+import { Text, View, FlatList, SectionList } from "react-native"
 
 import { Header } from "@/components/header"
 import { CategoryButton } from "@/components/category-button"
 
-import { CATEGORIES } from "@/utils/data/products"
+import { CATEGORIES, MENU } from "@/utils/data/products"
 
 export default function Home() {
   const [category, setCategory] = useState(CATEGORIES[0])
@@ -31,6 +31,36 @@ export default function Home() {
         contentContainerStyle={{ gap: 12 }}
         showsHorizontalScrollIndicator={false}
         horizontal
+      />
+
+      <SectionList
+        sections={MENU}
+        keyExtractor={(item) => item.id}
+        stickySectionHeadersEnabled={false}
+        renderItem={({ item }) => (
+          <Text
+            style={{
+              color: "#fff",
+              paddingBottom: 5,
+              fontSize: 12,
+              paddingLeft: 5,
+            }}
+          >
+            {item.title}
+          </Text>
+        )}
+        renderSectionHeader={({ section: { title } }) => (
+          <Text
+            style={{
+              color: "#0f0",
+              fontSize: 14,
+              fontWeight: "bold",
+              paddingTop: 10,
+            }}
+          >
+            {title}
+          </Text>
+        )}
       />
     </View>
   )
