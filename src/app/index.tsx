@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { Text, View, FlatList, SectionList } from "react-native"
 
 import { Header } from "@/components/header"
@@ -10,8 +10,22 @@ import { Product } from "@/components/product"
 export default function Home() {
   const [category, setCategory] = useState(CATEGORIES[0])
 
+  const sectionListRef = useRef<SectionList>(null)
+
   function handleCategorySelected(selectedCategory: string) {
     setCategory(selectedCategory)
+
+    const sectionIndex = CATEGORIES.findIndex(
+      (category) => category === selectedCategory
+    )
+
+    if (sectionListRef.current) {
+      sectionListRef.current.scrollToLocation({
+        animated: true,
+        sectionIndex: sectionIndex,
+        itemIndex: 0,
+      })
+    }
   }
 
   return (
@@ -36,6 +50,7 @@ export default function Home() {
 
       <SectionList
         sections={MENU}
+        ref={sectionListRef}
         keyExtractor={(item) => item.id}
         stickySectionHeadersEnabled={false}
         renderItem={({ item }) => <Product data={item} />}
