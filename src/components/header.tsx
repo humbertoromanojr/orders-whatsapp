@@ -23,7 +23,16 @@ export function Header({ title, cartQuantityItems = 0 }: HeaderProps) {
           style={{ width: "45%", height: 20 }}
           source={require("@/assets/logo.png")}
         />
-        <Text style={{ color: "#eee", paddingVertical: 10 }}>{title}</Text>
+        <Text
+          style={{
+            color: "#0f0",
+            paddingVertical: 10,
+            fontWeight: "bold",
+            fontSize: 16,
+          }}
+        >
+          {title}
+        </Text>
       </View>
 
       {cartQuantityItems > 0 && (
