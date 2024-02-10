@@ -12,7 +12,15 @@ export function CategoryButton({ title, isSelected, ...rest }: CategoryProps) {
       style={[isSelected ? s.activeCategory : s.noActiveCategory]}
       {...rest}
     >
-      <Text style={{ color: "#fff", padding: 7 }}>{title}</Text>
+      <Text
+        style={{
+          color: "#fff",
+          padding: 10,
+          paddingTop: 4,
+        }}
+      >
+        {title}
+      </Text>
     </Pressable>
   )
 }
@@ -27,5 +35,6 @@ const s = StyleSheet.create({
   noActiveCategory: {
     backgroundColor: "#26324f",
     borderRadius: 7,
+    borderWidth: 1,
   },
 })
