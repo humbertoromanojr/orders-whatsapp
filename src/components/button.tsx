@@ -17,11 +17,12 @@ function Button({ children, ...rest }: ButtonProps) {
     <TouchableOpacity
       {...rest}
       style={{
-        backgroundColor: "#17233d",
+        backgroundColor: "#0f0",
         alignItems: "center",
         justifyContent: "center",
         flexDirection: "row",
         borderRadius: 7,
+        padding: 10,
       }}
     >
       {children}
@@ -31,7 +32,14 @@ function Button({ children, ...rest }: ButtonProps) {
 
 function ButtonText({ children }: ButtonTextProps) {
   return (
-    <Text style={{ color: "#fff", fontSize: 14, fontWeight: "bold" }}>
+    <Text
+      style={{
+        color: "#222",
+        fontSize: 18,
+        fontWeight: "bold",
+        paddingLeft: 10,
+      }}
+    >
       {children}
     </Text>
   )
@@ -41,7 +49,7 @@ function ButtonIcon({ children }: ButtonIconProps) {
   return children
 }
 
-Button.text = ButtonText
+Button.Text = ButtonText
 Button.Icon = ButtonIcon
 
 export { Button }
