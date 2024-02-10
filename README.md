@@ -25,6 +25,7 @@ Orders WhatsApp
 - [Typescript](https://www.typescriptlang.org/)
 - [Expo](https://expo.dev/)
 - [Tailwindcss](https://tailwindcss.com/)
+- [Zustand](https://zustand-demo.pmnd.rs/)
 
 ## Important Settings
 
@@ -40,10 +41,11 @@ Estas outras configurações, são de extrema importância, sem elas, a sua apli
   - use favotire terminal from to create <strong>tailwind.config.js</strong>: `npx tailwindcss init`
     <br />
 - Install fonts google: `npx expo install expo-font @expo-google-fonts/inter`
+- Install Zustand: `npm install zustand`
 
 ## Demonstration
 
-<img src="https://drive.google.com/uc?export=view&id=1fcSqdQCsxf4qpUTDIyXWJwids1xRhEct" alt="ignite-fleet" width="100%" border="0">
+<img src="https://drive.google.com/uc?export=view&id=1fcSqdQCsxf4qpUTDIyXWJwids1xRhEct" alt="Orders whatsapp" width="100%" border="0">
 
 ## Install
 
