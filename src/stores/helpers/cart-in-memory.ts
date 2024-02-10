@@ -14,5 +14,3 @@ export function add(products: ProductCartProps[], newProduct: ProductProps) {
 
   return [...products, { ...newProduct, quantity: 1 }]
 }
-
-/* ... */
