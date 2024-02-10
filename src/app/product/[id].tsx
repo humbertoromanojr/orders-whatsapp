@@ -8,10 +8,17 @@ import { formatCurrency } from "@/utils/functions/format-currency"
 import { Button } from "@/components/button"
 import { LinkButton } from "@/components/link-button"
 
+import { useCartStore } from "@/stores/cart-store"
+
 export default function Product() {
+  const cartStore = useCartStore()
   const { id } = useLocalSearchParams()
 
   const product = PRODUCTS.filter((item) => item.id === id)[0]
+
+  function handleAddToCart() {
+    cartStore.add(product)
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -43,7 +50,7 @@ export default function Product() {
       </View>
 
       <View style={{ padding: 5, paddingBottom: 25, gap: 5 }}>
-        <Button>
+        <Button onPress={handleAddToCart}>
           <Button.Icon>
             <Feather name="plus-circle" size={26} />
           </Button.Icon>
