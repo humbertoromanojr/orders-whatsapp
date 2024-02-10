@@ -7,11 +7,18 @@ import { CategoryButton } from "@/components/category-button"
 import { Product } from "@/components/product"
 
 import { CATEGORIES, MENU } from "@/utils/data/products"
+import { useCartStore } from "@/stores/cart-store"
 
 export default function Home() {
+  const cartStore = useCartStore()
   const [category, setCategory] = useState(CATEGORIES[0])
 
   const sectionListRef = useRef<SectionList>(null)
+
+  const cartQuantityItem = cartStore.products.reduce(
+    (total, product) => total + product.quantity,
+    0
+  )
 
   function handleCategorySelected(selectedCategory: string) {
     setCategory(selectedCategory)
@@ -31,7 +38,7 @@ export default function Home() {
 
   return (
     <View>
-      <Header title="Faça o seu pedido" cartQuantityItems={1} />
+      <Header title="Faça o seu pedido" cartQuantityItems={cartQuantityItem} />
 
       <FlatList
         data={CATEGORIES}
