@@ -7,7 +7,15 @@ type LinkButtonProps = LinkProps<String> & {
 
 export function LinkButton({ title, ...rest }: LinkButtonProps) {
   return (
-    <Link style={{ textAlign: "center", fontWeight: "bold" }} {...rest}>
+    <Link
+      style={{
+        color: "#0f0",
+        textAlign: "center",
+        fontWeight: "bold",
+        marginTop: 20,
+      }}
+      {...rest}
+    >
       {title}
     </Link>
   )
