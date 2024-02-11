@@ -12,6 +12,7 @@ type ProductDataProps = {
   title: string
   description: string
   thumbnail: ImageProps
+  quantity?: number
 }
 
 type ProductProps = TouchableOpacityProps & {
@@ -34,12 +35,26 @@ export const Product = forwardRef<TouchableOpacity, ProductProps>(
       >
         <Image
           source={data.thumbnail}
-          style={{ width: 50, height: 50, borderRadius: 7 }}
+          style={{ width: 70, height: 70, borderRadius: 7 }}
         />
 
         <View style={{ flex: 1, marginLeft: 10 }}>
-          <Text style={{ color: "#0f0", flex: 1 }}>{data.title}</Text>
-          <Text style={{ color: "#fff", marginTop: 10, fontSize: 10 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: 10,
+            }}
+          >
+            <Text style={{ color: "#0f0", flex: 1 }}>{data.title}</Text>
+            {data.quantity && (
+              <Text style={{ color: "#fff", fontSize: 12, fontWeight: "bold" }}>
+                x {data.quantity}
+              </Text>
+            )}
+          </View>
+          <Text style={{ color: "#fff", fontSize: 10 }}>
             {data.description}
           </Text>
         </View>
