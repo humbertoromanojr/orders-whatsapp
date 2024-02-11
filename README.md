@@ -26,6 +26,7 @@ Orders WhatsApp
 - [Expo](https://expo.dev/)
 - [Tailwindcss](https://tailwindcss.com/)
 - [Zustand](https://zustand-demo.pmnd.rs/)
+- [keyboard aware scroll view](https://github.com/APSL/react-native-keyboard-aware-scroll-view)
 
 ## Important Settings
 
@@ -42,6 +43,7 @@ Estas outras configurações, são de extrema importância, sem elas, a sua apli
     <br />
 - Install fonts google: `npx expo install expo-font @expo-google-fonts/inter`
 - Install Zustand: `npm install zustand`
+- Install keyboard aware scroll view: `npm i react-native-keyboard-aware-scroll-view --save`
 
 ## Demonstration
 
