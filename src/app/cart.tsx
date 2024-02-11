@@ -1,9 +1,9 @@
 import React from "react"
-import { View, Text, ScrollView } from "react-native"
+import { View, Text, ScrollView, Alert } from "react-native"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
 import { Feather } from "@expo/vector-icons"
 
-import { useCartStore } from "@/stores/cart-store"
+import { ProductCartProps, useCartStore } from "@/stores/cart-store"
 
 import { formatCurrency } from "@/utils/functions/format-currency"
 
@@ -23,6 +23,18 @@ export default function Cart() {
     )
   )
 
+  function handleProductRemove(product: ProductCartProps) {
+    Alert.alert("Remover", `Deseja remover ${product.title} do carrinho?`, [
+      {
+        text: "Cancelar",
+      },
+      {
+        text: "Remover",
+        onPress: () => CartStore.remove(product.id),
+      },
+    ])
+  }
+
   return (
     <View style={{ flex: 1, paddingTop: 7 }}>
       <Header title="Seu carrinho" />
@@ -39,7 +51,11 @@ export default function Cart() {
               }}
             >
               {CartStore.products.map((product) => (
-                <Product key={product.id} data={product} />
+                <Product
+                  key={product.id}
+                  data={product}
+                  onPress={() => handleProductRemove(product)}
+                />
               ))}
             </View>
           ) : (
