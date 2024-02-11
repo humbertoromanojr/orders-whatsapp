@@ -1,5 +1,5 @@
 import React from "react"
-import { View, Image, Text } from "react-native"
+import { View, Image, Text, ScrollView } from "react-native"
 import { useLocalSearchParams, useNavigation } from "expo-router"
 import { Feather } from "@expo/vector-icons"
 import { Redirect } from "expo-router"
@@ -37,50 +37,52 @@ export default function Product() {
         style={{ width: "100%", height: "30%" }}
       />
 
-      <Text
-        style={{
-          color: "#fff",
-          fontSize: 22,
-          fontWeight: "bold",
-          paddingVertical: 10,
-          textAlign: "center",
-        }}
-      >
-        {product.title}
-      </Text>
-
-      <View style={{ flex: 1, padding: 5, marginTop: 8 }}>
-        <Text style={{ color: "#0f0", fontSize: 18 }}>
-          {formatCurrency(product.price)}
-        </Text>
-        <Text style={{ color: "#fff" }}>{product.description}</Text>
-
-        {product.ingredients.map((ingredient) => (
+      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
+        <View style={{ flex: 1, padding: 5 }}>
           <Text
-            key={ingredient}
             style={{
-              color: "#b6aeae",
-              fontSize: 14,
+              color: "#fff",
+              fontSize: 22,
               fontWeight: "bold",
-              marginTop: 5,
+              paddingVertical: 10,
+              textAlign: "center",
             }}
           >
-            {"\u2022"} {ingredient}
+            {product.title}
           </Text>
-        ))}
-      </View>
 
-      <View style={{ padding: 5, paddingBottom: 25, gap: 5 }}>
-        <Button onPress={handleAddToCart}>
-          <Button.Icon>
-            <Feather name="plus-circle" size={26} />
-          </Button.Icon>
+          <Text style={{ color: "#0f0", fontSize: 18 }}>
+            {formatCurrency(product.price)}
+          </Text>
+          <Text style={{ color: "#fff" }}>{product.description}</Text>
 
-          <Button.Text>Adicionar ao pedido</Button.Text>
-        </Button>
+          {product.ingredients.map((ingredient) => (
+            <Text
+              key={ingredient}
+              style={{
+                color: "#b6aeae",
+                fontSize: 14,
+                fontWeight: "bold",
+                marginTop: 5,
+              }}
+            >
+              {"\u2022"} {ingredient}
+            </Text>
+          ))}
+        </View>
 
-        <LinkButton title="Voltar ao cardápio" href="/" />
-      </View>
+        <View style={{ padding: 5, paddingBottom: 25, gap: 5 }}>
+          <Button onPress={handleAddToCart}>
+            <Button.Icon>
+              <Feather name="plus-circle" size={26} />
+            </Button.Icon>
+
+            <Button.Text>Adicionar ao pedido</Button.Text>
+          </Button>
+
+          <LinkButton title="Voltar ao cardápio" href="/" />
+        </View>
+      </ScrollView>
     </View>
   )
 }
