@@ -1,5 +1,6 @@
 import { View, Image, Text, TouchableOpacity } from "react-native"
 import { Feather } from "@expo/vector-icons"
+import { Link } from "expo-router"
 import colors from "tailwindcss/colors"
 
 type HeaderProps = {
@@ -36,32 +37,37 @@ export function Header({ title, cartQuantityItems = 0 }: HeaderProps) {
       </View>
 
       {cartQuantityItems > 0 && (
-        <TouchableOpacity style={{ position: "relative" }} activeOpacity={0.7}>
-          <View
-            style={{
-              backgroundColor: "#0f0",
-              width: 16,
-              height: 16,
-              borderRadius: 8,
-              justifyContent: "center",
-              alignItems: "center",
-              position: "absolute",
-              marginLeft: -7,
-              zIndex: 9,
-            }}
+        <Link href={"/cart"} asChild>
+          <TouchableOpacity
+            style={{ position: "relative" }}
+            activeOpacity={0.7}
           >
-            <Text style={{ color: "#222", fontWeight: "bold", fontSize: 10 }}>
-              {cartQuantityItems}
-            </Text>
-          </View>
+            <View
+              style={{
+                backgroundColor: "#0f0",
+                width: 16,
+                height: 16,
+                borderRadius: 8,
+                justifyContent: "center",
+                alignItems: "center",
+                position: "absolute",
+                marginLeft: -7,
+                zIndex: 9,
+              }}
+            >
+              <Text style={{ color: "#222", fontWeight: "bold", fontSize: 10 }}>
+                {cartQuantityItems}
+              </Text>
+            </View>
 
-          <Feather
-            name="shopping-bag"
-            color={colors.white}
-            size={24}
-            style={{ paddingTop: 9 }}
-          />
-        </TouchableOpacity>
+            <Feather
+              name="shopping-bag"
+              color={colors.white}
+              size={24}
+              style={{ paddingTop: 9 }}
+            />
+          </TouchableOpacity>
+        </Link>
       )}
     </View>
   )
