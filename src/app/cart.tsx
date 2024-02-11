@@ -1,5 +1,5 @@
 import React from "react"
-import { View } from "react-native"
+import { View, Text } from "react-native"
 
 import { useCartStore } from "@/stores/cart-store"
 
@@ -11,13 +11,28 @@ export default function Cart() {
 
   return (
     <View style={{ flex: 1, paddingTop: 7 }}>
-      <Header title="Carrinho" />
+      <Header title="Seu carrinho" />
 
-      <View style={{ flex: 1, padding: 5 }}>
-        {CartStore.products.map((product) => (
-          <Product key={product.id} data={product} />
-        ))}
-      </View>
+      {CartStore.products.length > 0 ? (
+        <View style={{ flex: 1, padding: 5 }}>
+          {CartStore.products.map((product) => (
+            <Product key={product.id} data={product} />
+          ))}
+        </View>
+      ) : (
+        <Text
+          style={{
+            flex: 1,
+            textAlignVertical: "center",
+            marginTop: 16,
+            textAlign: "center",
+            fontWeight: "bold",
+            color: "#fff",
+          }}
+        >
+          Seu carrinho esta vazio!
+        </Text>
+      )}
     </View>
   )
 }
