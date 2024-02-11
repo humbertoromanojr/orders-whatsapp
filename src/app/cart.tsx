@@ -1,7 +1,8 @@
-import React from "react"
-import { View, Text, ScrollView, Alert } from "react-native"
+import React, { useState } from "react"
+import { View, Text, ScrollView, Alert, Linking } from "react-native"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
 import { Feather } from "@expo/vector-icons"
+import { useNavigation } from "expo-router"
 
 import { ProductCartProps, useCartStore } from "@/stores/cart-store"
 
@@ -13,11 +14,15 @@ import { Input } from "@/components/input"
 import { Button } from "@/components/button"
 import { LinkButton } from "@/components/link-button"
 
+const PHONE_NUMBER = "5527997506668"
+
 export default function Cart() {
-  const CartStore = useCartStore()
+  const navigation = useNavigation()
+  const [address, setAddress] = useState("")
+  const cartStore = useCartStore()
 
   const valueTotal = formatCurrency(
-    CartStore.products.reduce(
+    cartStore.products.reduce(
       (total, product) => total + product.price * product.quantity,
       0
     )
@@ -30,9 +35,38 @@ export default function Cart() {
       },
       {
         text: "Remover",
-        onPress: () => CartStore.remove(product.id),
+        onPress: () => cartStore.remove(product.id),
       },
     ])
+  }
+
+  function handleOrderWhatsApp() {
+    if (address.trim().length === 0) {
+      return Alert.alert(
+        "Pedido",
+        "Informe por favor, os dados da entrega, o seu endereço completo!"
+      )
+    }
+
+    const products = cartStore.products
+      .map((product) => `\n ${product.quantity} ${product.title}`)
+      .join("")
+
+    const message = `
+      🍔 NOVO PEDIDO 🍔
+      \n 🏠 ${address}
+
+      ${products}
+
+      \n Valor total: ${valueTotal}
+    `
+
+    Linking.openURL(
+      `http://api.whatsapp.com/send?phone=${PHONE_NUMBER}&text=${message}`
+    )
+
+    cartStore.clear()
+    navigation.goBack()
   }
 
   return (
@@ -41,7 +75,7 @@ export default function Cart() {
 
       <KeyboardAwareScrollView>
         <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
-          {CartStore.products.length > 0 ? (
+          {cartStore.products.length > 0 ? (
             <View
               style={{
                 flex: 1,
@@ -50,7 +84,7 @@ export default function Cart() {
                 borderBottomColor: "#555",
               }}
             >
-              {CartStore.products.map((product) => (
+              {cartStore.products.map((product) => (
                 <Product
                   key={product.id}
                   data={product}
@@ -88,12 +122,18 @@ export default function Cart() {
             </Text>
           </View>
 
-          <Input placeholder="Informe o endereço de entrega com rua, bairro, CEP, número e complemento..." />
+          <Input
+            placeholder="Informe o endereço de entrega com rua, bairro, CEP, número e complemento..."
+            onChangeText={setAddress}
+            blurOnSubmit={true}
+            onSubmitEditing={handleOrderWhatsApp}
+            returnKeyType="next"
+          />
         </ScrollView>
       </KeyboardAwareScrollView>
 
       <View style={{ padding: 5, gap: 5 }}>
-        <Button>
+        <Button onPress={handleOrderWhatsApp}>
           <Button.Text>Enviar pedido</Button.Text>
           <Button.Icon>
             <Feather name="arrow-right-circle" size={22} />
