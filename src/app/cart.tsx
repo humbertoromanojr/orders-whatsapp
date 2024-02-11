@@ -1,6 +1,7 @@
 import React from "react"
 import { View, Text, ScrollView } from "react-native"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
+import { Feather } from "@expo/vector-icons"
 
 import { useCartStore } from "@/stores/cart-store"
 
@@ -9,6 +10,8 @@ import { formatCurrency } from "@/utils/functions/format-currency"
 import { Header } from "@/components/header"
 import { Product } from "@/components/product"
 import { Input } from "@/components/input"
+import { Button } from "@/components/button"
+import { LinkButton } from "@/components/link-button"
 
 export default function Cart() {
   const CartStore = useCartStore()
@@ -72,6 +75,17 @@ export default function Cart() {
           <Input placeholder="Informe o endereço de entrega com rua, bairro, CEP, número e complemento..." />
         </ScrollView>
       </KeyboardAwareScrollView>
+
+      <View style={{ padding: 5, gap: 5 }}>
+        <Button>
+          <Button.Text>Enviar pedido</Button.Text>
+          <Button.Icon>
+            <Feather name="arrow-right-circle" size={22} />
+          </Button.Icon>
+        </Button>
+
+        <LinkButton title="Voltar ao cardápio" href="/" />
+      </View>
     </View>
   )
 }
