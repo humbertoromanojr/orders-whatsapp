@@ -37,7 +37,7 @@ function ButtonText({ children }: ButtonTextProps) {
         color: "#222",
         fontSize: 18,
         fontWeight: "bold",
-        paddingLeft: 10,
+        paddingHorizontal: 10,
       }}
     >
       {children}
